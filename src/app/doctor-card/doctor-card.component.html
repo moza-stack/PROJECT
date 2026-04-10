@@ -1,0 +1,24 @@
+<p>Hello  from doctor-card </p>
+
+<div class="card">
+
+  <h3>{{ doctor.name }}</h3>
+
+  <!-- ngSwitch -->
+  <div [ngSwitch]="doctor.specialty">
+    <span *ngSwitchCase="'Cardiology'" class="red">Cardiology</span>
+    <span *ngSwitchCase="'Dermatology'" class="green">Dermatology</span>
+    <span *ngSwitchCase="'General Medicine'" class="blue">General</span>
+    <span *ngSwitchDefault>Other</span>
+  </div>
+
+  <p>⭐ {{ doctor.rating }}</p>
+
+  <!-- ngIf -->
+  <p *ngIf="!doctor.available">Fully Booked</p>
+
+  <button *ngIf="doctor.available" (click)="selectDoctorHandler()">
+    Book
+  </button>
+
+</div>

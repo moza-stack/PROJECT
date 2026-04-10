@@ -1,0 +1,7 @@
+<p>Hello doctor-list.component</p>
+<div *ngFor="let doctor of doctors">
+  <app-doctor-card
+    [doctor]="doctor"
+    (selectDoctor)="onSelectDoctor($event)">
+  </app-doctor-card>
+</div>

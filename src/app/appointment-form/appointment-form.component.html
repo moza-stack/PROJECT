@@ -1,0 +1,9 @@
+<p>Hello from appointment-form</p>
+
+<h2>Book Appointment</h2>
+
+<input type="text" (input)="onInput($event)" placeholder="Your name">
+
+<p>Booking for: {{ patientName }}</p>
+
+<button [disabled]="!isFormValid">Submit</button>
