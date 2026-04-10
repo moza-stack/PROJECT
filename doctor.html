@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctors</title>
+  <!--icons css file-->
+  <link rel="stylesheet" href="./css/all.min.css">
+  <!---bootstrap css file-->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <!---main css main-->
+  <link rel="stylesheet" href="./css/style.css">
+  <!--Darkmood css-->
+  <link rel="stylesheet" href="./CSS/DARKmood.css">
+  </head>
+
+<body>
+  
+
+</head>
+
+<body class="p-4">
+
+<h2 class="text-center mb-4">Doctors</h2>
+
+<!-- FILTERS -->
+<div class="row mb-3">
+  <div class="col-md-4">
+    <input type="text" id="search" class="form-control" placeholder="Search doctor...">
+  </div>
+
+  <div class="col-md-4">
+    <select id="specialty" class="form-select">
+      <option value="All">All</option>
+      <option>General</option>
+      <option>Cardiology</option>
+      <option>Dermatology</option>
+      <option>Pediatrics</option>
+      <option>Orthopedics</option>
+      <option>Dentistry</option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <select id="sort" class="form-select">
+      <option value="">Sort</option>
+      <option value="rating">Rating High→Low</option>
+      <option value="exp">Experience High→Low</option>
+    </select>
+  </div>
+</div>
+
+<!-- DOCTORS -->
+<div class="row" id="list"></div>
+
+<!-- TOAST -->
+<div class="toast position-fixed bottom-0 end-0 m-3" id="toast">
+  <div class="toast-body bg-success text-white">Appointment Booked!</div>
+</div>
+
+  <script>
+const doctors = [
+ {name:"Dr. Sara Al-Rashidi", specialty:"Cardiology", rating:4.9, exp:14, days:"Mon-Fri"},
+ {name:"Dr. Omar Khalil", specialty:"General", rating:4, exp:8, days:"Sun-Thu"},
+ {name:"Dr. Layla Mansour", specialty:"Dermatology", rating:4.7, exp:10, days:"Mon-Wed"},
+  {name:"Dr. Khalid Al-Farsi", specialty:"Pediatrics", rating:3, exp:5, days:"Daily"},
+  {name:"Dr. Nadia Hassan", specialty:"Orthopedics", rating:4.8, exp:16, days:"Tuesday-Thursday"},
+  {name:"Dr. Yousef Al-Balushi", specialty:"Dentistry", rating:4.8, exp:16, days:"Tuesday-Thursday"},
+
+
+
+];
+
+let filtered = [...doctors];
+
+function getInitials(name){
+  return name.split(" ").map(n=>n[0]).join("");
+}
+
+function render(){
+  let list=document.getElementById("list");
+  list.innerHTML="";
+
+  filtered.forEach(doc=>{
+    let stars="";
+    for(let i=0;i<doc.rating;i++) stars+="⭐";
+
+    list.innerHTML+=`
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <div class="d-flex align-items-center">
+          <div class="avatar bg-primary me-3">${getInitials(doc.name)}</div>
+          <div>
+            <h5>${doc.name}</h5>
+            <span class="badge bg-info">${doc.specialty}</span>
+          </div>
+        </div>
+        <p>${stars}</p>
+        <p>${doc.exp} years experience</p>
+        <p>${doc.days}</p>
+        <button class="btn btn-success" onclick="book('${doc.name}')">Book Appointment</button>
+      </div>
+    </div>`;
+  });
+}
+
+function filter(){
+  let search=document.getElementById("search").value.toLowerCase();
+  let spec=document.getElementById("specialty").value;
+
+  filtered = doctors.filter(d =>
+    (d.name.toLowerCase().includes(search) || d.specialty.toLowerCase().includes(search)) &&
+    (spec==="All" || d.specialty===spec)
+  );
+
+  sort();
+}
+
+function sort(){
+  let type=document.getElementById("sort").value;
+
+  if(type==="rating") filtered.sort((a,b)=>b.rating-a.rating);
+  if(type==="exp") filtered.sort((a,b)=>b.exp-a.exp);
+
+  render();
+}
+
+function book(name){
+  localStorage.setItem("selectedDoctor", name);
+  let toast = new bootstrap.Toast(document.getElementById('toast'));
+  toast.show();
+}
+
+document.getElementById("search").addEventListener("keyup", filter);
+document.getElementById("specialty").addEventListener("change", filter);
+document.getElementById("sort").addEventListener("change", sort);
+
+render();
+</script>  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+<script src="./js/main.js"></script>
+
+  <script src="./js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
