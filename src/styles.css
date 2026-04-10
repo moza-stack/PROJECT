@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-body.dark {
+/* body.dark {
   background: black;
   color: white;
+} */
+
+body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark .card {
+  background-color: #1e1e1e;
+  color: #fff;
 }

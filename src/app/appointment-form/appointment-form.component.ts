@@ -1,3 +1,19 @@
+// import { Component } from '@angular/core';
+
+// @Component({
+//   selector: 'app-appointment-form',
+//   templateUrl: './appointment-form.component.html'
+// })
+// export class AppointmentFormComponent {
+
+//   patientName = '';
+//   isFormValid = false;
+
+//   onInput(event: any) {
+//     this.patientName = event.target.value;
+//     this.isFormValid = this.patientName.length > 0;
+//   }
+// }
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,11 +22,15 @@ import { Component } from '@angular/core';
 })
 export class AppointmentFormComponent {
 
-  patientName = '';
-  isFormValid = false;
+  patientName: string = '';
+  isFormValid: boolean = false;
 
-  onInput(event: any) {
-    this.patientName = event.target.value;
-    this.isFormValid = this.patientName.length > 0;
+  onNameChange(value: string) {
+    this.patientName = value;
+    this.isFormValid = value.trim().length > 2;
+  }
+
+  submit() {
+    alert(`Appointment booked for ${this.patientName}`);
   }
 }

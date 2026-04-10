@@ -28,6 +28,19 @@ export class DoctorsService {
       fee: 30,
       available: true,
       availableDays: ["Sunday", "Monday", "Wednesday"]
+    },
+    {
+id: 3,
+name: "Dr. Layla Mansour",
+specialty: "Dermatology",
+rating: 4.7,
+experience: 10,
+fee: 50,
+available: true,
+availableDays: [
+"Monday",
+"Wednesday",
+"Friday"]
     }
   ];
 
